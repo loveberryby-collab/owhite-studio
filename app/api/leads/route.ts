@@ -10,7 +10,24 @@ interface LeadPayload {
   budget?: string;
 }
 
+interface LeadData {
+  name: string;
+  contact: string;
+  project_type: string | null;
+  message: string;
+  budget: string | null;
+}
+
 const NOTIFICATION_EMAIL = "5543514@gmail.com";
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY;
@@ -18,11 +35,12 @@ function getResend(): Resend | null {
   return new Resend(key);
 }
 
-async function sendNotification(body: LeadPayload) {
+async function sendNotification(lead: LeadData) {
   const resend = getResend();
   if (!resend) return;
 
-  const projectType = body.project_type || "Не указан";
+  const projectType = lead.project_type || "Не указан";
+  const budget = lead.budget || "Не указан";
 
   try {
     await resend.emails.send({
@@ -32,11 +50,11 @@ async function sendNotification(body: LeadPayload) {
       html: `
         <h2>Новая заявка с сайта</h2>
         <table style="border-collapse:collapse;width:100%;max-width:500px">
-          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Имя</td><td style="padding:8px;border-bottom:1px solid #eee">${body.name}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Контакт</td><td style="padding:8px;border-bottom:1px solid #eee">${body.contact}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Тип проекта</td><td style="padding:8px;border-bottom:1px solid #eee">${projectType}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Описание</td><td style="padding:8px;border-bottom:1px solid #eee">${body.message}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold">Бюджет</td><td style="padding:8px">${body.budget || "Не указан"}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Имя</td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(lead.name)}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Контакт</td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(lead.contact)}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Тип проекта</td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(projectType)}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Описание</td><td style="padding:8px;border-bottom:1px solid #eee">${escapeHtml(lead.message)}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold">Бюджет</td><td style="padding:8px">${escapeHtml(budget)}</td></tr>
         </table>
       `,
     });
@@ -56,7 +74,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const lead = {
+    const lead: LeadData = {
       name: body.name.trim(),
       contact: body.contact.trim(),
       project_type: body.project_type?.trim() || null,
@@ -75,7 +93,7 @@ export async function POST(request: Request) {
       );
     }
 
-    sendNotification(body);
+    await sendNotification(lead);
 
     return NextResponse.json({ success: true });
   } catch {
