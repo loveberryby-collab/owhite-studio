@@ -6,9 +6,9 @@ export const siteConfig = {
     "Автоматизация бизнес-процессов, Telegram-боты, AI-ассистенты, сайты, веб-приложения, базы подбора по прайсам и AI-видеоконтент для бизнеса.",
   url: "https://owhite.studio",
   contacts: {
-    telegram: "@your_telegram",
-    telegramUrl: "https://t.me/your_telegram",
-    email: "your@email.com",
+    telegram: "@olkawhite",
+    telegramUrl: "https://t.me/olkawhite",
+    email: "5543514@gmail.com",
     instagram: "@owhite.ai",
     instagramUrl: "https://instagram.com/owhite.ai",
     whatsapp: "https://wa.me/70000000000",
