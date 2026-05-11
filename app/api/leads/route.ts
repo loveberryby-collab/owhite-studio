@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { Resend } from "resend";
 
 interface LeadPayload {
   name: string;
@@ -7,6 +8,41 @@ interface LeadPayload {
   project_type?: string;
   message: string;
   budget?: string;
+}
+
+const NOTIFICATION_EMAIL = "5543514@gmail.com";
+
+function getResend(): Resend | null {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return null;
+  return new Resend(key);
+}
+
+async function sendNotification(body: LeadPayload) {
+  const resend = getResend();
+  if (!resend) return;
+
+  const projectType = body.project_type || "Не указан";
+
+  try {
+    await resend.emails.send({
+      from: "OWhite Studio <onboarding@resend.dev>",
+      to: NOTIFICATION_EMAIL,
+      subject: `Заявка — ${projectType}`,
+      html: `
+        <h2>Новая заявка с сайта</h2>
+        <table style="border-collapse:collapse;width:100%;max-width:500px">
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Имя</td><td style="padding:8px;border-bottom:1px solid #eee">${body.name}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Контакт</td><td style="padding:8px;border-bottom:1px solid #eee">${body.contact}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Тип проекта</td><td style="padding:8px;border-bottom:1px solid #eee">${projectType}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Описание</td><td style="padding:8px;border-bottom:1px solid #eee">${body.message}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold">Бюджет</td><td style="padding:8px">${body.budget || "Не указан"}</td></tr>
+        </table>
+      `,
+    });
+  } catch (err) {
+    console.error("Email notification error:", err);
+  }
 }
 
 export async function POST(request: Request) {
@@ -20,14 +56,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabase = getSupabaseAdmin();
-    const { error } = await supabase.from("leads").insert({
+    const lead = {
       name: body.name.trim(),
       contact: body.contact.trim(),
       project_type: body.project_type?.trim() || null,
       message: body.message.trim(),
       budget: body.budget?.trim() || null,
-    });
+    };
+
+    const supabase = getSupabaseAdmin();
+    const { error } = await supabase.from("leads").insert(lead);
 
     if (error) {
       console.error("Supabase insert error:", error);
@@ -36,6 +74,8 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    sendNotification(body);
 
     return NextResponse.json({ success: true });
   } catch {
