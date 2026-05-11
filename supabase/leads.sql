@@ -13,10 +13,7 @@ create table if not exists public.leads (
 -- Enable Row Level Security
 alter table public.leads enable row level security;
 
--- Allow anonymous inserts (for the contact form via API route)
-create policy "Allow anonymous insert" on public.leads
-  for insert
-  with check (true);
-
--- Only service role can read leads (for future admin panel)
--- No select/update/delete policies for anon role
+-- No policies for anon role: all inserts go through the API route
+-- which uses service_role key (bypasses RLS).
+-- No select/update/delete policies — all data access is restricted
+-- to service_role for the future admin panel.
