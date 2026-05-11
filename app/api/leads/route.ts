@@ -67,6 +67,13 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as LeadPayload;
 
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json(
+        { error: "Имя, контакт и описание задачи обязательны" },
+        { status: 400 }
+      );
+    }
+
     if (!body.name?.trim() || !body.contact?.trim() || !body.message?.trim()) {
       return NextResponse.json(
         { error: "Имя, контакт и описание задачи обязательны" },
