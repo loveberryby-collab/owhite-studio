@@ -74,14 +74,14 @@ export default function Footer() {
               href={siteConfig.contacts.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-cyan-500/25"
+              className="btn-primary px-5 py-2.5"
             >
               <Send className="h-4 w-4" />
               Написать в Telegram
             </a>
             <a
               href="#contact"
-              className="mt-3 inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/5"
+              className="btn-secondary mt-3 px-5 py-2.5"
             >
               Обсудить проект
             </a>

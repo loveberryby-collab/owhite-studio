@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Send, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const projectTypes = [
   "AI-автоматизация",
@@ -63,17 +64,19 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="bg-[#0b1120] py-20 sm:py-28">
+    <section id="contact" className="section-glow-top relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Обсудить проект
-            </h2>
-            <p className="mt-4 text-lg text-gray-400">
-              Расскажите о задаче — я предложу решение
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Обсудить проект
+              </h2>
+              <p className="mt-4 text-lg text-gray-400">
+                Расскажите о задаче — я предложу решение
+              </p>
+            </div>
+          </ScrollReveal>
 
           {status === "success" ? (
             <div className="mt-12 rounded-2xl border border-green-500/30 bg-green-500/10 p-8 text-center">
@@ -183,7 +186,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3.5 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-70"
+                className="btn-primary w-full justify-center py-3.5 disabled:opacity-70"
               >
                 {status === "loading" ? (
                   <>

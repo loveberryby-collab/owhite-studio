@@ -36,7 +36,15 @@ export default function RootLayout({
       lang="ru"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen">{children}</body>
+      <body className="relative min-h-screen overflow-x-hidden">
+        <div className="bg-grid pointer-events-none fixed inset-0 z-0" />
+        <div className="pointer-events-none fixed inset-0 z-0">
+          <div className="animate-glow-pulse absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-cyan-500/[0.07] blur-[160px]" />
+          <div className="animate-glow-pulse absolute top-1/3 -right-40 h-[400px] w-[400px] rounded-full bg-blue-600/[0.06] blur-[140px]" style={{ animationDelay: "2s" }} />
+          <div className="animate-glow-pulse absolute -bottom-32 left-1/3 h-[350px] w-[350px] rounded-full bg-indigo-500/[0.05] blur-[120px]" style={{ animationDelay: "4s" }} />
+        </div>
+        <div className="relative z-10">{children}</div>
+      </body>
     </html>
   );
 }

@@ -1,10 +1,13 @@
-import { ArrowRight, Bot, Brain, Database, Workflow } from "lucide-react";
+"use client";
+
+import { ArrowRight, Bot, Brain, Database, Workflow, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 const cards = [
-  { icon: Brain, label: "AI Assistant" },
-  { icon: Workflow, label: "n8n Workflow" },
-  { icon: Bot, label: "Telegram Bot" },
-  { icon: Database, label: "Supabase DB" },
+  { icon: Brain, label: "AI Assistant", color: "from-cyan-500/20 to-cyan-600/10" },
+  { icon: Workflow, label: "n8n Workflow", color: "from-blue-500/20 to-blue-600/10" },
+  { icon: Bot, label: "Telegram Bot", color: "from-indigo-500/20 to-indigo-600/10" },
+  { icon: Database, label: "Supabase DB", color: "from-emerald-500/20 to-emerald-600/10" },
 ];
 
 const badges = [
@@ -15,97 +18,150 @@ const badges = [
   "AI-видео",
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.12, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  }),
+};
+
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#0a0e1a] pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="pointer-events-none absolute inset-0">
         <div className="animate-glow-pulse absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[128px]" />
         <div className="animate-glow-pulse absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
+        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-2xl">
-            <div className="animate-fade-up mb-6 flex flex-wrap gap-2">
-              {badges.map((badge) => (
-                <span
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              className="mb-6 flex flex-wrap gap-2"
+            >
+              {badges.map((badge, i) => (
+                <motion.span
                   key={badge}
-                  className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400"
+                  custom={i}
+                  variants={fadeUp}
+                  className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400 backdrop-blur-sm"
                 >
                   {badge}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
 
-            <h1 className="animate-fade-up-delay-1 text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+            >
               Автоматизирую бизнес-процессы с помощью{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 AI, n8n и digital-инструментов
               </span>
-            </h1>
-            <p className="animate-fade-up-delay-2 mt-6 text-lg leading-relaxed text-gray-400">
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mt-6 text-lg leading-relaxed text-gray-400"
+            >
               Создаю Telegram-ботов, AI-ассистентов, сайты, веб-приложения,
               сервисы под ТЗ, базы подбора по прайсам и AI-видеоконтент для
               бизнеса.
-            </p>
-            <div className="animate-fade-up-delay-3 mt-8 flex flex-wrap gap-4">
-              <a
-                href="#portfolio"
-                className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
-              >
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mt-8 flex flex-wrap gap-4"
+            >
+              <a href="#portfolio" className="btn-secondary">
                 Посмотреть кейсы
                 <ArrowRight size={16} />
               </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-cyan-500/25"
-              >
+              <a href="#contact" className="btn-primary">
                 Обсудить проект
               </a>
-            </div>
+            </motion.div>
           </div>
 
           <div className="hidden lg:block">
             <div className="relative mx-auto w-full max-w-md">
-              <div className="animate-glow-pulse absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 blur-xl" />
+              <div className="animate-glow-pulse absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/15 to-blue-600/15 blur-2xl" />
+
               <div className="relative grid grid-cols-2 gap-4">
-                {cards.map((card) => (
-                  <div
+                {cards.map((card, i) => (
+                  <motion.div
                     key={card.label}
-                    className="card-glow group rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-cyan-500/30 hover:bg-white/10"
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{
+                      delay: 0.5 + i * 0.12,
+                      duration: 0.5,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                    className={`glass-card group p-6 ${i % 2 === 0 ? "animate-float" : "animate-float-delayed"}`}
                   >
-                    <card.icon className="mb-3 h-8 w-8 text-cyan-400 transition-transform group-hover:scale-110" />
+                    <div className={`mb-3 inline-flex rounded-xl bg-gradient-to-br ${card.color} p-2.5`}>
+                      <card.icon className="h-7 w-7 text-cyan-400 transition-transform group-hover:scale-110" />
+                    </div>
                     <p className="text-sm font-medium text-gray-300">
                       {card.label}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              <svg
-                className="absolute -top-4 -right-4 -bottom-4 -left-4 h-[calc(100%+32px)] w-[calc(100%+32px)]"
-                viewBox="0 0 400 400"
-                fill="none"
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                className="pointer-events-none absolute -top-6 -right-6 -bottom-6 -left-6"
               >
-                <path
-                  d="M100 50 L300 50 L350 200 L300 350 L100 350 L50 200Z"
-                  stroke="url(#hero-grad)"
-                  strokeWidth="0.5"
-                  strokeDasharray="4 4"
-                  opacity="0.4"
-                />
-                <defs>
-                  <linearGradient
-                    id="hero-grad"
-                    x1="0"
-                    y1="0"
-                    x2="400"
-                    y2="400"
-                  >
-                    <stop stopColor="#06b6d4" />
-                    <stop offset="1" stopColor="#3b82f6" />
-                  </linearGradient>
-                </defs>
-              </svg>
+                <svg className="h-full w-full" viewBox="0 0 400 400" fill="none">
+                  <path
+                    d="M80 40 L320 40 L360 200 L320 360 L80 360 L40 200Z"
+                    stroke="url(#hero-grad)"
+                    strokeWidth="0.5"
+                    strokeDasharray="6 6"
+                    opacity="0.3"
+                  />
+                  <circle cx="80" cy="40" r="3" fill="#06b6d4" opacity="0.5" />
+                  <circle cx="320" cy="40" r="3" fill="#06b6d4" opacity="0.5" />
+                  <circle cx="360" cy="200" r="3" fill="#3b82f6" opacity="0.5" />
+                  <circle cx="320" cy="360" r="3" fill="#3b82f6" opacity="0.5" />
+                  <circle cx="80" cy="360" r="3" fill="#06b6d4" opacity="0.5" />
+                  <circle cx="40" cy="200" r="3" fill="#06b6d4" opacity="0.5" />
+                  <defs>
+                    <linearGradient id="hero-grad" x1="0" y1="0" x2="400" y2="400">
+                      <stop stopColor="#06b6d4" />
+                      <stop offset="1" stopColor="#3b82f6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-cyan-500/20 bg-[#0a0e1a]/80 px-4 py-2 backdrop-blur-md"
+              >
+                <Zap className="h-4 w-4 text-cyan-400" />
+                <span className="text-xs font-medium text-gray-300">
+                  Всё работает автоматически
+                </span>
+              </motion.div>
             </div>
           </div>
         </div>

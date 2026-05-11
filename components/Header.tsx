@@ -35,7 +35,7 @@ export default function Header() {
         <div className="hidden md:block">
           <a
             href="#contact"
-            className="rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-cyan-500/25"
+            className="btn-primary px-5 py-2.5"
           >
             Обсудить проект
           </a>
@@ -70,7 +70,7 @@ export default function Header() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white"
+            className="btn-primary mt-2 w-full justify-center px-5 py-2.5"
           >
             Обсудить проект
           </a>
