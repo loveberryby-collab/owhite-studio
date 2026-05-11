@@ -7,29 +7,48 @@ const cards = [
   { icon: Database, label: "Supabase DB" },
 ];
 
+const badges = [
+  "AI-автоматизация",
+  "n8n workflows",
+  "Telegram-боты",
+  "Сервисы под ТЗ",
+  "AI-видео",
+];
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#0a0e1a] pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[128px]" />
-        <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
+        <div className="animate-glow-pulse absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[128px]" />
+        <div className="animate-glow-pulse absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-2xl">
-            <h1 className="text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <div className="animate-fade-up mb-6 flex flex-wrap gap-2">
+              {badges.map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="animate-fade-up-delay-1 text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
               Автоматизирую бизнес-процессы с помощью{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 AI, n8n и digital-инструментов
               </span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-gray-400">
+            <p className="animate-fade-up-delay-2 mt-6 text-lg leading-relaxed text-gray-400">
               Создаю Telegram-ботов, AI-ассистентов, сайты, веб-приложения,
               сервисы под ТЗ, базы подбора по прайсам и AI-видеоконтент для
               бизнеса.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="animate-fade-up-delay-3 mt-8 flex flex-wrap gap-4">
               <a
                 href="#portfolio"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
@@ -48,12 +67,12 @@ export default function Hero() {
 
           <div className="hidden lg:block">
             <div className="relative mx-auto w-full max-w-md">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 blur-xl" />
+              <div className="animate-glow-pulse absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 blur-xl" />
               <div className="relative grid grid-cols-2 gap-4">
                 {cards.map((card) => (
                   <div
                     key={card.label}
-                    className="group rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-cyan-500/30 hover:bg-white/10"
+                    className="card-glow group rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-cyan-500/30 hover:bg-white/10"
                   >
                     <card.icon className="mb-3 h-8 w-8 text-cyan-400 transition-transform group-hover:scale-110" />
                     <p className="text-sm font-medium text-gray-300">

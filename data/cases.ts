@@ -1,3 +1,12 @@
+import {
+  Bot,
+  Search,
+  LayoutDashboard,
+  Film,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
+
 export interface Case {
   id: string;
   title: string;
@@ -7,6 +16,8 @@ export interface Case {
   solution: string;
   stack: string[];
   result: string;
+  mockupIcon: LucideIcon;
+  mockupLabel: string;
 }
 
 export const cases: Case[] = [
@@ -22,6 +33,8 @@ export const cases: Case[] = [
     stack: ["n8n", "Telegram Bot API", "OpenAI / ChatGPT", "Webhook", "Speech-to-text"],
     result:
       "Получился рабочий AI-ассистент в Telegram, который может использоваться как личный помощник, консультант или бизнес-бот.",
+    mockupIcon: Bot,
+    mockupLabel: "Telegram Bot UI",
   },
   {
     id: "price-lookup",
@@ -43,6 +56,8 @@ export const cases: Case[] = [
     ],
     result:
       "Менеджер может быстро найти товар, проверить цену и не искать вручную по большим таблицам.",
+    mockupIcon: Search,
+    mockupLabel: "Price Search Dashboard",
   },
   {
     id: "web-app-custom",
@@ -56,6 +71,8 @@ export const cases: Case[] = [
     stack: ["Next.js", "React", "Supabase", "Vercel", "TypeScript", "Tailwind CSS"],
     result:
       "Получился прототип личного веб-приложения, которое можно развивать в полноценный продукт.",
+    mockupIcon: LayoutDashboard,
+    mockupLabel: "Web App Dashboard",
   },
   {
     id: "ai-video",
@@ -69,6 +86,8 @@ export const cases: Case[] = [
     stack: ["Kling", "Veo", "Seedance", "Nano Banana", "ChatGPT", "Claude", "Gemini"],
     result:
       "Готовые сценарии и промты, которые можно использовать для генерации видео в рекламном, продуктовом или viral style.",
+    mockupIcon: Film,
+    mockupLabel: "AI Video Storyboard",
   },
   {
     id: "lead-automation",
@@ -82,5 +101,7 @@ export const cases: Case[] = [
     stack: ["n8n", "Telegram", "Google Sheets", "Supabase", "ChatGPT", "Webhooks"],
     result:
       "Заявки не теряются, менеджер быстрее реагирует, данные хранятся структурированно.",
+    mockupIcon: Workflow,
+    mockupLabel: "Automation Workflow",
   },
 ];

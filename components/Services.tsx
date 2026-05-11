@@ -17,7 +17,7 @@ export default function Services() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-cyan-500/30 hover:bg-white/[0.06]"
+              className="card-glow group rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-cyan-500/30 hover:bg-white/[0.06] hover:shadow-lg hover:shadow-cyan-500/5"
             >
               <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-3">
                 <service.icon className="h-6 w-6 text-cyan-400" />

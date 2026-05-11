@@ -11,8 +11,13 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#0a0e1a]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#" className="text-lg font-bold tracking-tight text-white">
-          <span className="text-cyan-400">O</span>White
+        <a href="#" className="flex flex-col leading-tight">
+          <span className="text-lg font-bold tracking-tight text-white">
+            <span className="text-cyan-400">O</span>White
+          </span>
+          <span className="text-[10px] font-medium tracking-widest text-gray-400 uppercase">
+            Automation Studio
+          </span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

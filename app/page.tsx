@@ -1,8 +1,11 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import ClientProblems from "@/components/ClientProblems";
+import ClientResults from "@/components/ClientResults";
 import Portfolio from "@/components/Portfolio";
 import Stack from "@/components/Stack";
+import AutomationTags from "@/components/AutomationTags";
 import Audience from "@/components/Audience";
 import Process from "@/components/Process";
 import About from "@/components/About";
@@ -16,8 +19,11 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <ClientProblems />
+        <ClientResults />
         <Portfolio />
         <Stack />
+        <AutomationTags />
         <Audience />
         <Process />
         <About />

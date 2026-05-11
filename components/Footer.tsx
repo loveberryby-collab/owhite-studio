@@ -9,8 +9,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-1">
-            <a href="#" className="text-lg font-bold text-white">
-              <span className="text-cyan-400">O</span>White
+            <a href="#" className="flex flex-col leading-tight">
+              <span className="text-lg font-bold text-white">
+                <span className="text-cyan-400">O</span>White
+              </span>
+              <span className="text-[10px] font-medium tracking-widest text-gray-400 uppercase">
+                Automation Studio
+              </span>
             </a>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-gray-400">
               {siteConfig.tagline}
@@ -66,8 +71,17 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 text-sm font-semibold text-white">Связаться</h4>
             <a
-              href="#contact"
+              href={siteConfig.contacts.telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-cyan-500/25"
+            >
+              <Send className="h-4 w-4" />
+              Написать в Telegram
+            </a>
+            <a
+              href="#contact"
+              className="mt-3 inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/5"
             >
               Обсудить проект
             </a>
