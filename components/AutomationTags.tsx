@@ -1,15 +1,18 @@
 "use client";
 
-import { automationTags } from "@/data/stack";
+interface Props {
+  tags?: string[];
+  title?: string;
+}
 
-export default function AutomationTags() {
-  const doubled = [...automationTags, ...automationTags];
+export default function AutomationTags({ tags = [], title = "Что можно автоматизировать" }: Props) {
+  const doubled = [...tags, ...tags];
+
+  if (tags.length === 0) return null;
 
   return (
     <div className="mt-16">
-      <h3 className="mb-6 text-center text-lg font-semibold text-white">
-        Что можно автоматизировать
-      </h3>
+      <h3 className="mb-6 text-center text-lg font-semibold text-white">{title}</h3>
       <div className="relative overflow-hidden rounded-xl">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0a0e1a]" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0a0e1a]" />

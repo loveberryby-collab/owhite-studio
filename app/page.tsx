@@ -10,24 +10,29 @@ import Process from "@/components/Process";
 import About from "@/components/About";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { getSiteContent } from "@/lib/get-site-content";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const content = await getSiteContent();
+
   return (
     <>
-      <Header />
+      <Header site={content.site} />
       <main>
-        <Hero />
-        <Services />
-        <ClientProblems />
-        <ClientResults />
-        <Portfolio />
-        <Stack />
-        <Audience />
-        <Process />
-        <About />
-        <ContactForm />
+        <Hero data={content.hero} />
+        <Services data={content.services} />
+        <ClientProblems data={content.problems} />
+        <ClientResults data={content.results} />
+        <Portfolio data={content.portfolio} site={content.site} />
+        <Stack data={content.stack} />
+        <Audience data={content.audience} />
+        <Process data={content.process} />
+        <About data={content.about} />
+        <ContactForm data={content.contact} />
       </main>
-      <Footer />
+      <Footer site={content.site} />
     </>
   );
 }

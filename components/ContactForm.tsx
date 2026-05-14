@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Send, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-const projectTypes = [
+const defaultProjectTypes = [
   "AI-автоматизация",
   "Telegram-бот",
   "AI-ассистент",
@@ -18,7 +18,16 @@ const projectTypes = [
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export default function ContactForm() {
+interface Props {
+  data?: Record<string, unknown>;
+}
+
+export default function ContactForm({ data }: Props) {
+  const d = data || {};
+  const title = (d.title as string) || "Обсудить проект";
+  const subtitle = (d.subtitle as string) || "Расскажите о задаче — я предложу решение";
+  const projectTypes = (d.projectTypes as string[]) || defaultProjectTypes;
+
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -26,8 +35,7 @@ export default function ContactForm() {
     const errs: Record<string, string> = {};
     if (!fd.get("name")?.toString().trim()) errs.name = "Введите имя";
     if (!fd.get("contact")?.toString().trim()) errs.contact = "Введите контакт";
-    if (!fd.get("message")?.toString().trim())
-      errs.message = "Опишите задачу";
+    if (!fd.get("message")?.toString().trim()) errs.message = "Опишите задачу";
     return errs;
   }
 
@@ -69,28 +77,17 @@ export default function ContactForm() {
         <div className="mx-auto max-w-2xl">
           <ScrollReveal>
             <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Обсудить проект
-              </h2>
-              <p className="mt-4 text-lg text-gray-400">
-                Расскажите о задаче — я предложу решение
-              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h2>
+              <p className="mt-4 text-lg text-gray-400">{subtitle}</p>
             </div>
           </ScrollReveal>
 
           {status === "success" ? (
             <div className="mt-12 rounded-2xl border border-green-500/30 bg-green-500/10 p-8 text-center">
               <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-green-400" />
-              <h3 className="text-xl font-semibold text-white">
-                Спасибо! Заявка отправлена.
-              </h3>
-              <p className="mt-2 text-gray-400">
-                Я свяжусь с вами в ближайшее время.
-              </p>
-              <button
-                onClick={() => setStatus("idle")}
-                className="mt-6 text-sm font-medium text-cyan-400 hover:text-cyan-300"
-              >
+              <h3 className="text-xl font-semibold text-white">Спасибо! Заявка отправлена.</h3>
+              <p className="mt-2 text-gray-400">Я свяжусь с вами в ближайшее время.</p>
+              <button onClick={() => setStatus("idle")} className="mt-6 text-sm font-medium text-cyan-400 hover:text-cyan-300">
                 Отправить ещё одну заявку
               </button>
             </div>
@@ -106,15 +103,12 @@ export default function ContactForm() {
                   placeholder="Ваше имя"
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none transition-colors focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
                 />
-                {errors.name && (
-                  <p className="mt-1 text-xs text-red-400">{errors.name}</p>
-                )}
+                {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
               </div>
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-gray-300">
-                  Telegram или другой контакт{" "}
-                  <span className="text-red-400">*</span>
+                  Telegram или другой контакт <span className="text-red-400">*</span>
                 </label>
                 <input
                   name="contact"
@@ -122,24 +116,18 @@ export default function ContactForm() {
                   placeholder="@username или номер телефона"
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none transition-colors focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
                 />
-                {errors.contact && (
-                  <p className="mt-1 text-xs text-red-400">{errors.contact}</p>
-                )}
+                {errors.contact && <p className="mt-1 text-xs text-red-400">{errors.contact}</p>}
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-300">
-                  Тип проекта
-                </label>
+                <label className="mb-1.5 block text-sm font-medium text-gray-300">Тип проекта</label>
                 <select
                   name="project_type"
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
                 >
                   <option value="">Выберите тип проекта</option>
                   {projectTypes.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
+                    <option key={t} value={t}>{t}</option>
                   ))}
                 </select>
               </div>
@@ -154,17 +142,12 @@ export default function ContactForm() {
                   placeholder="Расскажите, что хотите создать или автоматизировать"
                   className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none transition-colors focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
                 />
-                {errors.message && (
-                  <p className="mt-1 text-xs text-red-400">{errors.message}</p>
-                )}
+                {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
               </div>
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-gray-300">
-                  Бюджет{" "}
-                  <span className="text-xs font-normal text-gray-500">
-                    (необязательно)
-                  </span>
+                  Бюджет <span className="text-xs font-normal text-gray-500">(необязательно)</span>
                 </label>
                 <input
                   name="budget"
@@ -177,9 +160,7 @@ export default function ContactForm() {
               {status === "error" && (
                 <div className="flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3">
                   <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
-                  <p className="text-sm text-red-300">
-                    Произошла ошибка. Попробуйте ещё раз или свяжитесь напрямую.
-                  </p>
+                  <p className="text-sm text-red-300">Произошла ошибка. Попробуйте ещё раз или свяжитесь напрямую.</p>
                 </div>
               )}
 

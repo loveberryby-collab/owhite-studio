@@ -10,7 +10,7 @@ const cards = [
   { icon: Database, label: "Supabase DB", color: "from-emerald-500/20 to-emerald-600/10" },
 ];
 
-const badges = [
+const defaultBadges = [
   "AI-автоматизация",
   "n8n workflows",
   "Telegram-боты",
@@ -27,7 +27,19 @@ const fadeUp = {
   }),
 };
 
-export default function Hero() {
+interface Props {
+  data?: Record<string, unknown>;
+}
+
+export default function Hero({ data }: Props) {
+  const d = data || {};
+  const badges = (d.badges as string[]) || defaultBadges;
+  const title = (d.title as string) || "Автоматизирую бизнес-процессы с помощью";
+  const titleAccent = (d.titleAccent as string) || "AI, n8n и digital-инструментов";
+  const subtitle = (d.subtitle as string) || "Создаю Telegram-ботов, AI-ассистентов, сайты, веб-приложения, сервисы под ТЗ, базы подбора по прайсам и AI-видеоконтент для бизнеса.";
+  const ctaPrimary = (d.ctaPrimary as string) || "Обсудить проект";
+  const ctaSecondary = (d.ctaSecondary as string) || "Посмотреть кейсы";
+
   return (
     <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="pointer-events-none absolute inset-0">
@@ -62,9 +74,9 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
             >
-              Автоматизирую бизнес-процессы с помощью{" "}
+              {title}{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                AI, n8n и digital-инструментов
+                {titleAccent}
               </span>
             </motion.h1>
 
@@ -74,9 +86,7 @@ export default function Hero() {
               transition={{ delay: 0.45, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="mt-6 text-lg leading-relaxed text-gray-400"
             >
-              Создаю Telegram-ботов, AI-ассистентов, сайты, веб-приложения,
-              сервисы под ТЗ, базы подбора по прайсам и AI-видеоконтент для
-              бизнеса.
+              {subtitle}
             </motion.p>
 
             <motion.div
@@ -86,11 +96,11 @@ export default function Hero() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <a href="#portfolio" className="btn-secondary">
-                Посмотреть кейсы
+                {ctaSecondary}
                 <ArrowRight size={16} />
               </a>
               <a href="#contact" className="btn-primary">
-                Обсудить проект
+                {ctaPrimary}
               </a>
             </motion.div>
           </div>
@@ -98,26 +108,19 @@ export default function Hero() {
           <div className="hidden lg:block">
             <div className="relative mx-auto w-full max-w-md">
               <div className="animate-glow-pulse absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/15 to-blue-600/15 blur-2xl" />
-
               <div className="relative grid grid-cols-2 gap-4">
                 {cards.map((card, i) => (
                   <motion.div
                     key={card.label}
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{
-                      delay: 0.5 + i * 0.12,
-                      duration: 0.5,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    }}
+                    transition={{ delay: 0.5 + i * 0.12, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                     className={`glass-card group p-6 ${i % 2 === 0 ? "animate-float" : "animate-float-delayed"}`}
                   >
                     <div className={`mb-3 inline-flex rounded-xl bg-gradient-to-br ${card.color} p-2.5`}>
                       <card.icon className="h-7 w-7 text-cyan-400 transition-transform group-hover:scale-110" />
                     </div>
-                    <p className="text-sm font-medium text-gray-300">
-                      {card.label}
-                    </p>
+                    <p className="text-sm font-medium text-gray-300">{card.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -129,13 +132,7 @@ export default function Hero() {
                 className="pointer-events-none absolute -top-6 -right-6 -bottom-6 -left-6"
               >
                 <svg className="h-full w-full" viewBox="0 0 400 400" fill="none">
-                  <path
-                    d="M80 40 L320 40 L360 200 L320 360 L80 360 L40 200Z"
-                    stroke="url(#hero-grad)"
-                    strokeWidth="0.5"
-                    strokeDasharray="6 6"
-                    opacity="0.3"
-                  />
+                  <path d="M80 40 L320 40 L360 200 L320 360 L80 360 L40 200Z" stroke="url(#hero-grad)" strokeWidth="0.5" strokeDasharray="6 6" opacity="0.3" />
                   <circle cx="80" cy="40" r="3" fill="#06b6d4" opacity="0.5" />
                   <circle cx="320" cy="40" r="3" fill="#06b6d4" opacity="0.5" />
                   <circle cx="360" cy="200" r="3" fill="#3b82f6" opacity="0.5" />
@@ -158,9 +155,7 @@ export default function Hero() {
                 className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full border border-cyan-500/20 bg-[#0a0e1a]/80 px-4 py-2 backdrop-blur-md"
               >
                 <Zap className="h-4 w-4 text-cyan-400" />
-                <span className="text-xs font-medium text-gray-300">
-                  Всё работает автоматически
-                </span>
+                <span className="text-xs font-medium text-gray-300">Всё работает автоматически</span>
               </motion.div>
             </div>
           </div>
