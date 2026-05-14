@@ -739,11 +739,12 @@ export default function AdminPage() {
     setSaving(true);
     try {
       for (const key of dirty) {
-        await fetch("/api/admin/content", {
+        const res = await fetch("/api/admin/content", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ key, value: content[key] }),
         });
+        if (!res.ok) throw new Error(`Failed to save ${key}`);
       }
       setDirty(new Set());
       showToast("Сохранено!", "success");

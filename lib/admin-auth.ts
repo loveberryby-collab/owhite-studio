@@ -36,7 +36,7 @@ export async function changePassword(
     .upsert(
       {
         key: "admin_password",
-        value: JSON.stringify(newPassword),
+        value: newPassword,
         updated_at: new Date().toISOString(),
       },
       { onConflict: "key" }
@@ -52,8 +52,12 @@ function makeToken(password: string): string {
 function extractPasswordFromToken(token: string): string | null {
   try {
     const decoded = Buffer.from(token, "base64").toString();
-    const parts = decoded.split(":");
-    if (parts.length >= 3 && parts[0] === "admin") return parts[1];
+    const firstColon = decoded.indexOf(":");
+    const lastColon = decoded.lastIndexOf(":");
+    if (firstColon > 0 && lastColon > firstColon) {
+      const prefix = decoded.slice(0, firstColon);
+      if (prefix === "admin") return decoded.slice(firstColon + 1, lastColon);
+    }
   } catch {
     // invalid token
   }
