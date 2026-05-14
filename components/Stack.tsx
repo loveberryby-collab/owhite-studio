@@ -28,7 +28,7 @@ export default function Stack({ data }: Props) {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {categories.map((cat, i) => (
             <ScrollReveal key={i} delay={i * 0.06}>
-              <div className="glass-card h-full p-5">
+              <div className="glass-card h-full p-5" data-scroll="" data-scroll-speed={i % 2 === 0 ? 0.02 : 0.05}>
                 <h3 className="mb-4 text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                   {cat.category as string}
                 </h3>

@@ -31,7 +31,7 @@ export default function Process({ data }: Props) {
               const Icon = getIcon((s.icon as string) || "Rocket");
               return (
                 <ScrollReveal key={i} delay={i * 0.1}>
-                  <div className={`relative flex items-start gap-6 md:gap-12 ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
+                  <div className={`relative flex items-start gap-6 md:gap-12 ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`} data-scroll="" data-scroll-speed={0.03 + i * 0.01}>
                     <div className="hidden shrink-0 md:block md:w-5/12" />
                     <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0a0e1a] shadow-lg shadow-cyan-500/5 transition-all hover:border-cyan-500/30 hover:shadow-cyan-500/10">
                       <Icon className="h-6 w-6 text-cyan-400" />

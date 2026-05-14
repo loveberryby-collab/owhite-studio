@@ -21,7 +21,7 @@ export default function Portfolio({ data, site }: Props) {
     <section id="portfolio" className="section-glow-top relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center">
+          <div className="text-center" data-scroll="" data-scroll-speed="0.05">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h2>
             <p className="mt-4 text-lg text-gray-400">{subtitle}</p>
           </div>
@@ -33,7 +33,7 @@ export default function Portfolio({ data, site }: Props) {
             const stack = (c.stack as string[]) || [];
             return (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="glass-card card-glow group flex h-full flex-col overflow-hidden">
+                <div className="glass-card card-glow group flex h-full flex-col overflow-hidden" data-scroll="" data-scroll-speed={i % 3 === 0 ? 0.02 : i % 3 === 1 ? 0.05 : 0.08}>
                   <div className="relative flex items-center justify-center border-b border-white/5 bg-gradient-to-br from-cyan-500/5 to-blue-600/10 p-8">
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative flex flex-col items-center gap-3">

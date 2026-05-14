@@ -28,7 +28,7 @@ export default function ClientResults({ data }: Props) {
             const Icon = getIcon((item.icon as string) || "Sparkles");
             return (
               <ScrollReveal key={i} delay={i * 0.06}>
-                <div className="glass-card group flex items-center gap-4 p-5">
+                <div className="glass-card group flex items-center gap-4 p-5" data-scroll="" data-scroll-speed={i % 2 === 0 ? 0.03 : 0.06}>
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 transition-all group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/10">
                     <Icon className="h-6 w-6 text-cyan-400" />
                   </div>

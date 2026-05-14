@@ -7,18 +7,18 @@ const sp = { stiffness: 40, damping: 20, mass: 0.8 };
 export default function ParallaxBackground() {
   const { scrollYProgress } = useScroll();
 
-  const y1Raw = useTransform(scrollYProgress, [0, 1], [0, -320]);
-  const y2Raw = useTransform(scrollYProgress, [0, 1], [0, 220]);
-  const y3Raw = useTransform(scrollYProgress, [0, 1], [0, -180]);
-  const y4Raw = useTransform(scrollYProgress, [0, 1], [0, 280]);
-  const y5Raw = useTransform(scrollYProgress, [0, 1], [0, -140]);
-  const x1Raw = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const x2Raw = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const x3Raw = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const r1Raw = useTransform(scrollYProgress, [0, 1], [0, 45]);
-  const r2Raw = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const s1Raw = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 0.9]);
-  const s2Raw = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.1, 1.3]);
+  const y1Raw = useTransform(scrollYProgress, [0, 1], [0, -500]);
+  const y2Raw = useTransform(scrollYProgress, [0, 1], [0, 350]);
+  const y3Raw = useTransform(scrollYProgress, [0, 1], [0, -280]);
+  const y4Raw = useTransform(scrollYProgress, [0, 1], [0, 420]);
+  const y5Raw = useTransform(scrollYProgress, [0, 1], [0, -220]);
+  const x1Raw = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const x2Raw = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const x3Raw = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const r1Raw = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const r2Raw = useTransform(scrollYProgress, [0, 1], [0, -45]);
+  const s1Raw = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.4, 0.8]);
+  const s2Raw = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1.2, 1.4]);
 
   const y1 = useSpring(y1Raw, sp);
   const y2 = useSpring(y2Raw, sp);

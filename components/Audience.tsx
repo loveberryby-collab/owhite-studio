@@ -28,7 +28,7 @@ export default function Audience({ data }: Props) {
             const Icon = getIcon((a.icon as string) || "Users");
             return (
               <ScrollReveal key={i} delay={i * 0.05}>
-                <div className="glass-card group flex items-center gap-4 p-4">
+                <div className="glass-card group flex items-center gap-4 p-4" data-scroll="" data-scroll-speed={i % 2 === 0 ? 0.02 : 0.04}>
                   <div className="shrink-0 rounded-lg bg-cyan-500/10 p-2.5 transition-all group-hover:bg-cyan-500/15 group-hover:shadow-md group-hover:shadow-cyan-500/10">
                     <Icon className="h-5 w-5 text-cyan-400" />
                   </div>

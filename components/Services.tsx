@@ -17,7 +17,7 @@ export default function Services({ data }: Props) {
     <section id="services" className="section-glow-top relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center">
+          <div className="text-center" data-scroll="" data-scroll-speed="0.05">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h2>
             <p className="mt-4 text-lg text-gray-400">{subtitle}</p>
           </div>
@@ -29,7 +29,7 @@ export default function Services({ data }: Props) {
             const features = (service.features as string[]) || [];
             return (
               <ScrollReveal key={i} delay={i * 0.08}>
-                <div className="glass-card card-glow group h-full p-6">
+                <div className="glass-card card-glow group h-full p-6" data-scroll="" data-scroll-speed={i % 2 === 0 ? 0.03 : 0.06}>
                   <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-3 transition-shadow group-hover:shadow-lg group-hover:shadow-cyan-500/10">
                     <Icon className="h-6 w-6 text-cyan-400 transition-transform group-hover:scale-110" />
                   </div>

@@ -2,6 +2,7 @@
 
 import { ArrowRight, Bot, Brain, Database, Workflow, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import ParallaxElement from "./ParallaxElement";
 
 const cards = [
   { icon: Brain, label: "AI Assistant", color: "from-cyan-500/20 to-cyan-600/10" },
@@ -43,9 +44,9 @@ export default function Hero({ data }: Props) {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="animate-glow-pulse absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[128px]" />
-        <div className="animate-glow-pulse absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
-        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
+        <ParallaxElement speed={-0.3} className="animate-glow-pulse absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-[128px]" />
+        <ParallaxElement speed={-0.2} className="animate-glow-pulse absolute right-0 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
+        <ParallaxElement speed={-0.15} className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -106,7 +107,7 @@ export default function Hero({ data }: Props) {
           </div>
 
           <div className="hidden lg:block">
-            <div className="relative mx-auto w-full max-w-md">
+            <ParallaxElement speed={0.15} className="relative mx-auto w-full max-w-md">
               <div className="animate-glow-pulse absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/15 to-blue-600/15 blur-2xl" />
               <div className="relative grid grid-cols-2 gap-4">
                 {cards.map((card, i) => (
@@ -157,7 +158,7 @@ export default function Hero({ data }: Props) {
                 <Zap className="h-4 w-4 text-cyan-400" />
                 <span className="text-xs font-medium text-gray-300">Всё работает автоматически</span>
               </motion.div>
-            </div>
+            </ParallaxElement>
           </div>
         </div>
       </div>
