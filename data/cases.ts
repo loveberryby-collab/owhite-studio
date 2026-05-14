@@ -1,0 +1,107 @@
+import {
+  Bot,
+  Search,
+  LayoutDashboard,
+  Film,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
+
+export interface Case {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  task: string;
+  solution: string;
+  stack: string[];
+  result: string;
+  mockupIcon: LucideIcon;
+  mockupLabel: string;
+}
+
+export const cases: Case[] = [
+  {
+    id: "telegram-ai-bot",
+    title: "Telegram-бот с AI-ассистентом",
+    category: "AI-боты / n8n / Telegram",
+    description:
+      "Telegram-бот, который принимает текстовые и голосовые сообщения, передает их в AI-модель и возвращает пользователю готовый ответ.",
+    task: "Создать удобного ассистента, который может работать в Telegram и помогать пользователю с текстовыми и голосовыми запросами.",
+    solution:
+      "Собран workflow в n8n: Telegram Webhook принимает сообщение, определяет тип данных, при необходимости обрабатывает голос, отправляет запрос в AI-модель и возвращает ответ пользователю.",
+    stack: ["n8n", "Telegram Bot API", "OpenAI / ChatGPT", "Webhook", "Speech-to-text"],
+    result:
+      "Получился рабочий AI-ассистент в Telegram, который может использоваться как личный помощник, консультант или бизнес-бот.",
+    mockupIcon: Bot,
+    mockupLabel: "Telegram Bot UI",
+  },
+  {
+    id: "price-lookup",
+    title: "Сервис подбора товара по прайсу",
+    category: "Веб-сервис / база данных / поиск",
+    description:
+      "Сервис, где пользователь вводит артикул или название товара, а система ищет позицию в базе и показывает цену, описание и другую информацию.",
+    task: "Упростить поиск товаров по большим прайсам и дать менеджерам быстрый инструмент для проверки цен.",
+    solution:
+      "Создан интерфейс загрузки прайсов, проверка файла, обработка данных, загрузка в базу и поиск по артикулу или названию товара.",
+    stack: [
+      "Supabase",
+      "Google Sheets",
+      "Next.js",
+      "TypeScript",
+      "AI coding",
+      "GitHub",
+      "Vercel",
+    ],
+    result:
+      "Менеджер может быстро найти товар, проверить цену и не искать вручную по большим таблицам.",
+    mockupIcon: Search,
+    mockupLabel: "Price Search Dashboard",
+  },
+  {
+    id: "web-app-custom",
+    title: "Веб-приложение под ТЗ",
+    category: "Web app / MVP / Supabase",
+    description:
+      "Веб-приложение с авторизацией, базой данных, личным кабинетом и несколькими разделами под задачи пользователя.",
+    task: "Создать удобный личный сервис, где можно вести планы, привычки, питание, настроение и другие данные.",
+    solution:
+      "Разработана структура приложения: экран авторизации, главный экран с разделами, отдельные страницы для данных, хранение информации в Supabase.",
+    stack: ["Next.js", "React", "Supabase", "Vercel", "TypeScript", "Tailwind CSS"],
+    result:
+      "Получился прототип личного веб-приложения, которое можно развивать в полноценный продукт.",
+    mockupIcon: LayoutDashboard,
+    mockupLabel: "Web App Dashboard",
+  },
+  {
+    id: "ai-video",
+    title: "AI-видеоролики для рекламы и соцсетей",
+    category: "AI video / content / creative",
+    description:
+      "Разработка сценариев, промтов и раскадровок для AI-видео: рекламные ролики, Reels, TikTok, Shorts и продуктовые видео.",
+    task: "Сделать промты и сценарии, которые позволяют получить более кинематографичный и управляемый результат в AI-видео генераторах.",
+    solution:
+      "Для каждого ролика прописывается идея, сцены, тип кадра, движение камеры, свет, стиль, визуальная атмосфера и технические параметры.",
+    stack: ["Kling", "Veo", "Seedance", "Nano Banana", "ChatGPT", "Claude", "Gemini"],
+    result:
+      "Готовые сценарии и промты, которые можно использовать для генерации видео в рекламном, продуктовом или viral style.",
+    mockupIcon: Film,
+    mockupLabel: "AI Video Storyboard",
+  },
+  {
+    id: "lead-automation",
+    title: "Автоматизация обработки заявок",
+    category: "Automation / n8n / CRM logic",
+    description:
+      "Автоматический сценарий, который принимает заявку, сохраняет данные, отправляет уведомление и помогает менеджеру быстрее обработать клиента.",
+    task: "Убрать ручную обработку заявок и сделать процесс быстрее и прозрачнее.",
+    solution:
+      "Настроен сценарий: заявка приходит из формы или Telegram, данные сохраняются в таблицу/базу, менеджер получает уведомление, клиенту можно отправить автоматический ответ.",
+    stack: ["n8n", "Telegram", "Google Sheets", "Supabase", "ChatGPT", "Webhooks"],
+    result:
+      "Заявки не теряются, менеджер быстрее реагирует, данные хранятся структурированно.",
+    mockupIcon: Workflow,
+    mockupLabel: "Automation Workflow",
+  },
+];
