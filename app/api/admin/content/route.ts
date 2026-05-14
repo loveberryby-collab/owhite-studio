@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getContent, setContent, getAllContent } from "@/lib/content";
+import { defaultContent } from "@/lib/default-content";
 
 export async function GET(request: Request) {
   const isAuth = await isAdminAuthenticated();
@@ -13,11 +14,19 @@ export async function GET(request: Request) {
 
   if (key) {
     const value = await getContent(key);
-    return NextResponse.json({ key, value });
+    const fallback = defaultContent[key] ?? null;
+    return NextResponse.json({ key, value: value ?? fallback });
   }
 
   const all = await getAllContent();
-  return NextResponse.json(all);
+  const merged: Record<string, unknown> = {};
+  for (const k of Object.keys(defaultContent)) {
+    merged[k] = all[k] ?? defaultContent[k];
+  }
+  for (const k of Object.keys(all)) {
+    if (!(k in merged)) merged[k] = all[k];
+  }
+  return NextResponse.json(merged);
 }
 
 export async function POST(request: Request) {
